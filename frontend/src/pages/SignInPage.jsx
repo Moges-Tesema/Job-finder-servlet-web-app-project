@@ -11,7 +11,7 @@ const SignInPage = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/login', { username, email }); // Replace with your actual backend API endpoint
+      const response = await axios.post('https://localhost:300/api/login', { username, email });
       console.log(response.data); 
     } catch (error) {
       console.error('Login failed:', error);
@@ -23,7 +23,7 @@ const SignInPage = () => {
     <>
      <Logo/>
    
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-green-100">
       <div className="bg-white p-10 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-semibold mb-6">Sign In</h2>
         <form onSubmit={handleSubmit}>

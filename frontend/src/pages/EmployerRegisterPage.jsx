@@ -46,7 +46,7 @@ const EmployerRegisterPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-blue-100">
       <header className="bg-white shadow-md py-4">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <Logo />
@@ -69,9 +69,7 @@ const EmployerRegisterPage = () => {
               onChange={(e) => setFirstName(e.target.value)}
               className="mt-1 p-2 w-2/3 border rounded-md focus:ring-blue-500 focus:border-blue-500"
             />
-          </div>
-
-          
+          </div> 
           <div className="flex items-center space-x-4">
             <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 w-1/3">
               Last Name:

@@ -9,8 +9,6 @@ const AboutUsPage = () => {
           <h1 className="text-4xl font-extrabold text-blue-800">About Us</h1>
           <p className="text-xl text-gray-600 mt-4">Learn more about JobFinder and our mission</p>
         </div>
-
-       
         <section className="bg-white p-8 rounded-lg shadow-lg mb-12">
           <h2 className="text-3xl font-semibold text-blue-600 mb-6">Our Mission</h2>
           <p className="text-lg text-gray-700">
@@ -20,8 +18,6 @@ const AboutUsPage = () => {
             process as efficient and accessible as possible.
           </p>
         </section>
-
-      
         <section className="bg-white p-8 rounded-lg shadow-lg mb-12">
           <h2 className="text-3xl font-semibold text-blue-600 mb-6">Current Version</h2>
           <p className="text-lg text-gray-700">
@@ -29,8 +25,6 @@ const AboutUsPage = () => {
             add new features, and provide regular updates. Stay tuned for upcoming enhancements and new tools to help you in your job search.
           </p>
         </section>
-
-        
         <section className="bg-white p-8 rounded-lg shadow-lg mb-12">
           <h2 className="text-3xl font-semibold text-blue-600 mb-6">Contact Us</h2>
           <p className="text-lg text-gray-700 mb-4">
@@ -48,8 +42,6 @@ const AboutUsPage = () => {
             </p>
           </div>
         </section>
-
-        
         <section className="bg-white p-8 rounded-lg shadow-lg mb-12">
           <h2 className="text-3xl font-semibold text-blue-600 mb-6">Additional Information</h2>
           <p className="text-lg text-gray-700">

@@ -6,7 +6,7 @@ const SignUpPage = () => {
   return (
     <>
     <Logo/>
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen bg-green-100">
       <div className="bg-white p-10 rounded-lg shadow-md w-96">
         <h2 className="text-2xl font-semibold mb-6">Join Us</h2>
         <p className="text-center mb-8">
