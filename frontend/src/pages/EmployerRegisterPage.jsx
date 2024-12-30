@@ -1,6 +1,8 @@
 import Logo from "../components/Logo";
 import React, { useState } from 'react';
 import axios from 'axios';
+import jobTitles from "../components/dataHouse/JobTitle";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const EmployerRegisterPage = () => {
   const [firstName, setFirstName] = useState('');
@@ -9,39 +11,31 @@ const EmployerRegisterPage = () => {
   const [address, setAddress] = useState('');
   const [officeAddress, setOfficeAddress] = useState('');
   const [jobToHire, setJobToHire] = useState('');
-
-  const jobTitles = [
-    'Frontend Developer',
-    'Backend Developer',
-    'Fullstack Developer',
-    'Mobile App Developer',
-    'AI Engineer',
-    'Cloud Engineer',
-    'Blockchain Engineer',
-    'System Designer',
-    'Penetration Tester',
-    'Cyber Expert',
-    'Data Analyst',
-  ];
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post('/api/employers', {
-        firstName,
-        lastName,
-        companyName,
-        address,
-        officeAddress,
-        jobToHire,
-      });
+    // try {
+    //   const response = await axios.post('/api/employers', {
+    //     firstName,
+    //     lastName,
+    //     companyName,
+    //     address,
+    //     officeAddress,
+    //     jobToHire,
+    //   });
 
-      console.log('Employer created successfully:', response.data);
+    //   console.log('Employer created successfully:', response.data);
       
-    } catch (error) {
-      console.error('Error creating employer:', error);
+    // } catch (error) {
+    //   console.error('Error creating employer:', error);
 
+    // }
+    if (firstName && lastName && companyName && address && officeAddress && jobToHire) {
+      navigate('/employerProfile');
+    } else {
+      alert('Please fill in all fields before submitting');
     }
   };
 
@@ -57,7 +51,6 @@ const EmployerRegisterPage = () => {
         <h1 className="text-3xl font-bold mb-8 text-center">Employer Registration</h1>
 
         <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
-          {/* First Name */}
           <div className="flex items-center space-x-4">
             <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 w-1/3">
               First Name:
@@ -83,7 +76,6 @@ const EmployerRegisterPage = () => {
             />
           </div>
 
-          
           <div className="flex items-center space-x-4">
             <label htmlFor="companyName" className="block text-sm font-medium text-gray-700 w-1/3">
               Company Name:
@@ -97,7 +89,6 @@ const EmployerRegisterPage = () => {
             />
           </div>
 
-          
           <div className="flex items-center space-x-4">
             <label htmlFor="address" className="block text-sm font-medium text-gray-700 w-1/3">
               Address:
@@ -111,7 +102,6 @@ const EmployerRegisterPage = () => {
             />
           </div>
 
-          
           <div className="flex items-center space-x-4">
             <label htmlFor="officeAddress" className="block text-sm font-medium text-gray-700 w-1/3">
               Office Address:
@@ -125,7 +115,6 @@ const EmployerRegisterPage = () => {
             />
           </div>
 
-          
           <div className="flex items-center space-x-4">
             <label htmlFor="jobToHire" className="block text-sm font-medium text-gray-700 w-1/3">
               Job to Hire:
@@ -145,7 +134,6 @@ const EmployerRegisterPage = () => {
             </select>
           </div>
 
-          
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mx-auto block"

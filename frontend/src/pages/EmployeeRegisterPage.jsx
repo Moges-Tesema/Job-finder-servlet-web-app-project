@@ -1,6 +1,7 @@
 import Logo from "../components/Logo";
 import React, { useState } from 'react';
 import axios from 'axios';
+import jobTitles from "../components/dataHouse/JobTitle";
 
 const EmployeeRegisterPage = () => {
   const [firstName, setFirstName] = useState('');
@@ -11,21 +12,6 @@ const EmployeeRegisterPage = () => {
   const [address, setAddress] = useState('');
   const [jobTitle, setJobTitle] = useState('');
   const [experience, setExperience] = useState('');
-
-  const jobTitles = [
-    'Frontend Developer',
-    'Backend Developer',
-    'Fullstack Developer',
-    'Mobile App Developer',
-    'AI Engineer',
-    'Cloud Engineer',
-    'Blockchain Engineer',
-    'System Designer',
-    'Penetration Tester',
-    'Cyber Expert',
-    'Data Analyst',
-  ];
-
   const experiences = ['0-2', '3-5', '6-8', '9+'];
 
   const handleSubmit = async (e) => {
@@ -41,6 +27,10 @@ const EmployeeRegisterPage = () => {
         address,
         jobTitle,
         experience,
+      },{
+        header:{
+          "content-type":"application/json"
+        }
       });
 
       console.log('Employee created successfully:', response.data);
