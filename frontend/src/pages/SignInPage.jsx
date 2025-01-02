@@ -11,19 +11,29 @@ const SignInPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    localStorage.setItem('username', username);
-    localStorage.setItem('email', email);
+   
+    if (!username || !email) {
+      alert('Please enter both username and email');
+      return;
+    }
+   
+    try {
+      
+      const response = await axios.post('localhost:5000/api/login', {
+        username,
+        email,
+      });
 
-    navigate('/employeeProfile');
+      
+      navigate('/employeeProfile');
+    } catch (error) {
+      
+      console.error('Login error:', error);
+      alert('Invalid username or email');
+      navigate('/employeeProfile');
+    }
+    
   };
-
-  useState(() => {
-    const storedUsername = localStorage.getItem('username');
-    const storedEmail = localStorage.getItem('email');
-    if (storedUsername) setUsername(storedUsername);
-    if (storedEmail) setEmail(storedEmail);
-  }, []);
-
   return (
     <>
       <Logo />

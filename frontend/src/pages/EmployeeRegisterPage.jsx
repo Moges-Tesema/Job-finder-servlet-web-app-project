@@ -16,30 +16,36 @@ const EmployeeRegisterPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post('/api/employees', {
-        firstName,
-        lastName,
-        email,
-        password,
-        birthDate,
-        address,
-        jobTitle,
-        experience,
-      },{
-        header:{
-          "content-type":"application/json"
-        }
-      });
-
-      console.log('Employee created successfully:', response.data);
-      
-    } catch (error) {
-      console.error('Error creating employee:', error);
-      
-    }
   };
+
+  useEffect(() => {
+    const sendDataToBackend = async () => {
+      try {
+        const response = await axios.post('http://localhost:5000/api/employeeRegister', {
+          firstName,
+          lastName,
+          email,
+          password,
+          birthDate,
+          address,
+          jobTitle,
+          experience,
+        }, {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        });
+
+        console.log('Employee created successfully:', response.data);
+      } catch (error) {
+        console.error('Error creating employee:', error);
+      }
+    };
+
+    if (firstName && lastName && email && password && birthDate && address && jobTitle && experience) {
+      sendDataToBackend();
+    }
+  }, [firstName, lastName, email, password, birthDate, address, jobTitle, experience]);
 
   return (
     <div className="min-h-screen bg-green-100">

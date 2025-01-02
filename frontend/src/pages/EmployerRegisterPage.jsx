@@ -16,22 +16,44 @@ const EmployerRegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // try {
-    //   const response = await axios.post('/api/employers', {
-    //     firstName,
-    //     lastName,
-    //     companyName,
-    //     address,
-    //     officeAddress,
-    //     jobToHire,
-    //   });
+    try {
+      const response = await axios.post('/api/employers', {
+       
+      });
 
-    //   console.log('Employer created successfully:', response.data);
+      console.log('Employer created successfully:', response.data);
       
-    // } catch (error) {
-    //   console.error('Error creating employer:', error);
+    } catch (error) {
+      console.error('Error creating employer:', error);
 
-    // }
+    }
+    useEffect(() => {
+      const sendDataToBackend = async () => {
+        try {
+          const response = await axios.post('http://localhost:5000/api/employeeRegister', {
+            firstName,
+            lastName,
+            companyName,
+            address,
+            officeAddress,
+            jobToHire,
+          }, {
+            headers: {
+              "Content-Type": "application/json"
+            }
+          });
+  
+          console.log('Employer created successfully:', response.data);
+        } catch (error) {
+          console.error('Error creating employee:', error);
+        }
+      };
+  
+      if (firstName && lastName &&  address && jobToHire) {
+        sendDataToBackend();
+      }
+    }, [firstName, lastName, email, password, birthDate, address, jobToHire]);
+  
     if (firstName && lastName && companyName && address && officeAddress && jobToHire) {
       navigate('/employerProfile');
     } else {
