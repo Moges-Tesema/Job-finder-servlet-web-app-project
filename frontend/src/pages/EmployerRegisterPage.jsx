@@ -1,8 +1,8 @@
 import Logo from "../components/Logo";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import jobTitles from "../components/dataHouse/JobTitle";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const EmployerRegisterPage = () => {
   const [firstName, setFirstName] = useState('');
@@ -16,48 +16,30 @@ const EmployerRegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!firstName || !lastName || !companyName || !address || !officeAddress || !jobToHire) {
+      alert('Please fill in all fields before submitting');
+      return;
+    }
+
     try {
-      const response = await axios.post('/api/employers', {
-       
+      const response = await axios.post('http://localhost:5000/api/employeeRegister', {
+        firstName,
+        lastName,
+        companyName,
+        address,
+        officeAddress,
+        jobToHire,
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
       });
 
       console.log('Employer created successfully:', response.data);
-      
+
+      navigate('/employerProfile');
     } catch (error) {
       console.error('Error creating employer:', error);
-
-    }
-    useEffect(() => {
-      const sendDataToBackend = async () => {
-        try {
-          const response = await axios.post('http://localhost:5000/api/employeeRegister', {
-            firstName,
-            lastName,
-            companyName,
-            address,
-            officeAddress,
-            jobToHire,
-          }, {
-            headers: {
-              "Content-Type": "application/json"
-            }
-          });
-  
-          console.log('Employer created successfully:', response.data);
-        } catch (error) {
-          console.error('Error creating employee:', error);
-        }
-      };
-  
-      if (firstName && lastName &&  address && jobToHire) {
-        sendDataToBackend();
-      }
-    }, [firstName, lastName, email, password, birthDate, address, jobToHire]);
-  
-    if (firstName && lastName && companyName && address && officeAddress && jobToHire) {
-      navigate('/employerProfile');
-    } else {
-      alert('Please fill in all fields before submitting');
     }
   };
 

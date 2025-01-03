@@ -12,8 +12,10 @@ const employeeData = {
 function EmployeeProfilePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [appliedJobs, setAppliedJobs] = useState([]);
+  const [appliedJobsList, setAppliedJobsList] = useState([]);
   const [appliedTechJob, setAppliedTechJob] = useState(false);
   const [appliedCompanyJob, setAppliedCompanyJob] = useState(false);
+  const [jobApplied, setJobApplied] = useState({});
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -24,6 +26,17 @@ function EmployeeProfilePage() {
       setAppliedJobs([job]);
       setAppliedTechJob(true);
       setAppliedCompanyJob(true);
+      setJobApplied({ [job]: true });
+    } else if (appliedJobs.includes(job)) {
+      setAppliedJobs(appliedJobs.filter((j) => j !== job));
+      setAppliedTechJob(false);
+      setAppliedCompanyJob(false);
+      setJobApplied({ ...jobApplied, [job]: false });
+    } else {
+      setAppliedJobs([...appliedJobs, job]);
+      setAppliedTechJob(true);
+      setAppliedCompanyJob(true);
+      setJobApplied({ ...jobApplied, [job]: true });
     }
   };
 
@@ -64,7 +77,7 @@ function EmployeeProfilePage() {
             value={searchQuery}
             onChange={handleSearchChange}
             placeholder="Search for jobs..."
-            className="w-full p-3 border border-gray-300 rounded-md mb-4"
+            className="w-3/4 p-3 border border-gray-300 rounded-md mb-4"
           />
           <div className="space-y-4">
             {filteredJobs.length > 0 ? (
@@ -76,13 +89,23 @@ function EmployeeProfilePage() {
                   <div>
                     <h3 className="font-semibold text-lg">{jobTitle}</h3>
                   </div>
-                  <button
-                    onClick={() => handleApplyJob(jobTitle)}
-                    className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-                    disabled={appliedTechJob && appliedCompanyJob}
-                  >
-                    Apply
-                  </button>
+                  <div className="flex space-x-4">
+                    {jobApplied[jobTitle] ? (
+                      <button
+                        onClick={() => handleApplyJob(jobTitle)}
+                        className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
+                      >
+                        Remove
+                      </button>
+                    ) : (
+                      <button
+                        onClick={() => handleApplyJob(jobTitle)}
+                        className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+                      >
+                        Apply
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))
             ) : (

@@ -1,5 +1,5 @@
 import Logo from "../components/Logo";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import jobTitles from "../components/dataHouse/JobTitle";
 
@@ -14,39 +14,39 @@ const EmployeeRegisterPage = () => {
   const [experience, setExperience] = useState('');
   const experiences = ['0-2', '3-5', '6-8', '9+'];
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const sendDataToBackend = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/employeeRegister', {
+        firstName,
+        lastName,
+        email,
+        password,
+        birthDate,
+        address,
+        jobTitle,
+        experience,
+      }, {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      });
+
+      console.log('Employee created successfully:', response.data);
+    } catch (error) {
+      console.error('Error creating employee:', error);
+    }
   };
 
-  useEffect(() => {
-    const sendDataToBackend = async () => {
-      try {
-        const response = await axios.post('http://localhost:5000/api/employeeRegister', {
-          firstName,
-          lastName,
-          email,
-          password,
-          birthDate,
-          address,
-          jobTitle,
-          experience,
-        }, {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        });
-
-        console.log('Employee created successfully:', response.data);
-      } catch (error) {
-        console.error('Error creating employee:', error);
-      }
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (firstName && lastName && email && password && birthDate && address && jobTitle && experience) {
       sendDataToBackend();
     }
-  }, [firstName, lastName, email, password, birthDate, address, jobTitle, experience]);
-
+    else{
+      alert("fill all the fields");
+    }
+  };
   return (
     <div className="min-h-screen bg-green-100">
       <header className="bg-white shadow-md py-4">

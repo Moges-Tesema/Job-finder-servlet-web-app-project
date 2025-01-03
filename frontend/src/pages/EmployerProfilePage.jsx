@@ -32,7 +32,7 @@ function EmployerProfilePage() {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 bg-green-200 h-screen">
       <img
         src="../public/employer/profile1.png"
         alt="Profile"
@@ -45,13 +45,13 @@ function EmployerProfilePage() {
         value={searchQuery}
         onChange={handleSearchChange}
         placeholder="Search for developers by skill..."
-        className="border border-gray-300 rounded-md p-2 mb-4 w-full"
+        className="border border-gray-300 rounded-md p-2 mb-4 w-1/3"
       />
 
       <ul>
         {filteredDevelopers.map((developer) => (
-          <li key={developer.id} className="mb-4">
-            <div className="flex justify-between items-center">
+          <li key={developer.id} className="mb-4 ml-10 mr-10">
+            <div className="flex justify-between items-center hover:bg-gray-200">
               <span>{developer.name} - {developer.skills.join(', ')}</span>
               <div className="space-x-2">
                 <button
